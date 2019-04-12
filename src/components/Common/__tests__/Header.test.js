@@ -1,5 +1,5 @@
 import React from "react";
-import { mount } from "enzyme";
+import { mount, shallow } from "enzyme";
 import Header from "../Header";
 import ReactDOM from "react-dom";
 import { MemoryRouter } from "react-router-dom";
@@ -25,6 +25,7 @@ describe("header component testing", () => {
         <AppRoutes />
       </MemoryRouter>
     );
+    // console.log(wrapper.debug());
     wrapper
       .find(Header)
       .find("[href='/about']")

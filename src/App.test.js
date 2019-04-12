@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { MemoryRouter } from "react-router-dom";
 import App from "./App";
 import Home from "./components/home";
-import NotFound from "./components/NotFound";
+import NotFound from "./components/Common/NotFound";
 import AppRoutes from "./AppRoutes";
 import About from "./components/about";
 
