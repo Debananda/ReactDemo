@@ -1,27 +1,32 @@
-import React from "react";
+import React, { Component } from "react";
 import { Card, CardHeader, CardBody, CardFooter, Button } from "reactstrap";
 import { withRouter } from "react-router-dom";
-function Post(props) {
-  const handleUserClick = () => {
-    props.getUserDetails(props.post.userId);
+
+class Post extends Component {
+  handleUserClick = () => {
+    this.props.getUserDetails(this.props.post.userId);
   };
-  const handleCommentClick = () => {
-    props.history.push(`${props.match.url}/${props.post.id}/comments`);
+  handleCommentClick = () => {
+    this.props.history.push(
+      `${this.props.match.url}/${this.props.post.id}/comments`
+    );
   };
-  return (
-    <Card>
-      <CardHeader>{props.post.title}</CardHeader>
-      <CardBody>{props.post.body}</CardBody>
-      <CardFooter>
-        <Button color="link" onClick={handleUserClick}>
-          User Details
-        </Button>
-        <Button color="link" onClick={handleCommentClick}>
-          Comments
-        </Button>
-      </CardFooter>
-    </Card>
-  );
+  render() {
+    return (
+      <Card>
+        <CardHeader>{this.props.post.title}</CardHeader>
+        <CardBody>{this.props.post.body}</CardBody>
+        <CardFooter>
+          <Button color="link" onClick={this.handleUserClick}>
+            User Details
+          </Button>
+          <Button color="link" onClick={this.handleCommentClick}>
+            Comments
+          </Button>
+        </CardFooter>
+      </Card>
+    );
+  }
 }
 
 export default withRouter(Post);

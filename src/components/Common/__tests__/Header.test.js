@@ -4,7 +4,7 @@ import Header from "../Header";
 import ReactDOM from "react-dom";
 import { MemoryRouter } from "react-router-dom";
 import AppRoutes from "../../../AppRoutes";
-import About from "../../about";
+import About from "../../About";
 
 describe("header component testing", () => {
   test("shall render  without crashing", () => {

@@ -4,13 +4,13 @@ import { MemoryRouter } from "react-router-dom";
 import Post from "../Post";
 
 describe("Testing Post Component", () => {
+  const dummyPost = {
+    userId: 1,
+    id: 1,
+    title: "test title",
+    body: "test body"
+  };
   it("post shall render properly with all the data", () => {
-    const dummyPost = {
-      userId: 1,
-      id: 1,
-      title: "test title",
-      body: "test body"
-    };
     const wrapper = mount(
       <MemoryRouter>
         <Post post={dummyPost} />
@@ -23,12 +23,6 @@ describe("Testing Post Component", () => {
   });
   it("shall call getUserDetails Properly", () => {
     const getUserDetailsMock = jest.fn();
-    const dummyPost = {
-      userId: 2,
-      id: 1,
-      title: "test title",
-      body: "test body"
-    };
     const wrapper = mount(
       <MemoryRouter>
         <Post post={dummyPost} getUserDetails={getUserDetailsMock} />
@@ -37,6 +31,18 @@ describe("Testing Post Component", () => {
     const userDetailsBtn = wrapper.find(".btn").at(0);
     userDetailsBtn.simulate("click");
     expect(getUserDetailsMock.mock.calls.length).toBe(1);
-    expect(getUserDetailsMock).toBeCalledWith(2);
+    expect(getUserDetailsMock).toBeCalledWith(1);
+  });
+  it("shall route to  comments properly", () => {
+    const wrapper = mount(
+      <MemoryRouter initialEntries={["/posts"]}>
+        <Post post={dummyPost} />
+      </MemoryRouter>
+    );
+    const commentsBtn = wrapper.find(".btn").at(1);
+    commentsBtn.simulate("click");
+    expect(wrapper.instance().history.location.pathname).toContain(
+      "/1/comments"
+    );
   });
 });

@@ -1,9 +1,9 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import Home from "./components/home";
+import Home from "./components/Home";
 import NotFound from "./components/Common/NotFound";
 import Posts from "./components/Posts";
-import About from "./components/about";
+import About from "./components/About";
 
 export default function AppRoutes() {
   return (

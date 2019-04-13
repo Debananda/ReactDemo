@@ -3,10 +3,10 @@ import { mount } from "enzyme";
 import ReactDOM from "react-dom";
 import { MemoryRouter } from "react-router-dom";
 import App from "./App";
-import Home from "./components/home";
+import Home from "./components/Home";
 import NotFound from "./components/Common/NotFound";
 import AppRoutes from "./AppRoutes";
-import About from "./components/about";
+import About from "./components/About";
 
 describe("App testing", () => {
   it("renders without crashing", () => {
