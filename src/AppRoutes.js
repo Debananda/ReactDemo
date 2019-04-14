@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import NotFound from "./components/Common/NotFound";
 import Posts from "./components/Posts";
 import About from "./components/About";
+import Auth from "./components/Authentication";
 
 export default function AppRoutes() {
   return (
@@ -11,6 +12,7 @@ export default function AppRoutes() {
       <Route path="/" exact component={Home} />
       <Route path="/posts" component={Posts} />
       <Route path="/about" component={About} />
+      <Route path="/auth" component={Auth} />
       <Route component={NotFound} />
     </Switch>
   );

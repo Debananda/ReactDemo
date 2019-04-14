@@ -33,7 +33,7 @@ describe("Testing Post Component", () => {
     expect(getUserDetailsMock.mock.calls.length).toBe(1);
     expect(getUserDetailsMock).toBeCalledWith(1);
   });
-  it("shall route to  comments properly", () => {
+  it("shall route to comments properly", () => {
     const wrapper = mount(
       <MemoryRouter initialEntries={["/posts"]}>
         <Post post={dummyPost} />
