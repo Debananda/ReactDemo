@@ -5,8 +5,18 @@ import ReactDOM from "react-dom";
 import { MemoryRouter } from "react-router-dom";
 import AppRoutes from "../../../AppRoutes";
 import About from "../../About";
+import TestRenderer from "react-test-renderer";
 
 describe("header component testing", () => {
+  test("shall have correct snapShot", () => {
+    const component = TestRenderer.create(
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>
+    );
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
   test("shall render  without crashing", () => {
     const div = document.createElement("div");
     ReactDOM.render(
