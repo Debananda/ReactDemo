@@ -1,45 +1,42 @@
-import React, { Component } from "react";
-import { Container, Row, Col, Button } from "reactstrap";
+import React, {Component, Fragment} from "react";
+import {Button} from "primereact/button";
 import Comment from "./Comment";
+import {connect} from 'react-redux';
+import {loadPostComments} from '../../store/actions/CommentActions';
+import withLoader from "../Common/withLoader";
 
-export default class Comments extends Component {
-  state = { comments: [] };
+class Comments extends Component {
+    state = {comments: []};
 
-  componentDidMount() {
-    const postId = Number.parseInt(this.props.match.params["id"]);
-    if (postId) {
-      fetch("https://jsonplaceholder.typicode.com/comments")
-        .then(response => response.json())
-        .then(json => {
-          const comments = json.filter(c => c.postId === postId);
-          this.setState({ comments });
-        });
+    componentDidMount() {
+        const postId = Number.parseInt(this.props.match.params["id"]);
+        this.props.loadPostComments(postId);
     }
-  }
 
-  goBack = () => {
-    this.props.history.goBack();
-  };
+    goBack = () => {
+        this.props.history.goBack();
+    };
 
-  render() {
-    return (
-      <Container fluid>
-        <Row>
-          <Col xs="12">
-            <div className="d-flex justify-content-between">
-              <h1>Comments</h1>
-              <Button color="link" id="btnGoBack" onClick={this.goBack}>
-                Go Back
-              </Button>
-            </div>
-          </Col>
-          {this.state.comments.map(comment => (
-            <Col xs="12" sm="6" md="3" key={comment.id}>
-              <Comment comment={comment} />
-            </Col>
-          ))}
-        </Row>
-      </Container>
-    );
-  }
+    render() {
+        return (
+            <Fragment>
+                <div className="p-flex">
+                    <h1>Comments</h1>
+                    <Button color="link" id="btnGoBack" onClick={this.goBack} label={"Go Back"}/>
+                </div>
+                <div className={"p-grid p-flex"}>
+                    {this.props.comments.map(comment => (
+                        <div className={"p-col-6 p-md-3"} key={comment.id}>
+                            <Comment comment={comment}/>
+                        </div>
+                    ))}
+                </div>
+            </Fragment>
+        );
+    }
 }
+
+export default withLoader(connect(state => ({
+    comments: state.comment.comments,
+    loading: state.comment.loading
+}), {loadPostComments})(Comments));

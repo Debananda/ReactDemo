@@ -1,11 +1,10 @@
 import React from 'react';
-import {Card, CardBody, CardHeader} from "reactstrap";
+import {Card} from "primereact/card";
 
 const Comment = ({comment}) => {
     return (
-        <Card>
-            <CardHeader>{comment.name}</CardHeader>
-            <CardBody>{comment.body}</CardBody>
+        <Card title={comment.name}>
+            {comment.body}
         </Card>
     )
 };

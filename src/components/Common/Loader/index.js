@@ -1,8 +1,6 @@
 import React from "react";
-import './loader.css';
+import {ProgressSpinner} from 'primereact/progressspinner';
 
 export default function Loader({show}) {
-    return show === true ? <div className={'d-flex w-100 justify-content-center align-items-center'}>
-        <div className="loader"/>
-    </div> : null;
+    return show === true ? <ProgressSpinner/> : null;
 }

@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import { Container } from "reactstrap";
+import React, {Component} from "react";
+
 class Home extends Component {
-  render() {
-    return (
-      <Container>
-        <h1 className={"text-center"}>Home Component</h1>
-      </Container>
-    );
-  }
+    render() {
+        return (
+            <div>
+                <h1 className={"text-center"}>Home Component</h1>
+            </div>
+        );
+    }
 }
 
 export default Home;

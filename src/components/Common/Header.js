@@ -1,57 +1,33 @@
 import React from "react";
 import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem
-} from "reactstrap";
-import { NavLink } from "react-router-dom";
+    Menubar
+} from "primereact/menubar";
+import {withRouter} from 'react-router-dom'
 
-export default class Header extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      isOpen: false
+const Header = (props) => {
+    const navigateToPage = (path) => {
+        props.history.push(path)
     };
-  }
-
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
-
-  render() {
+    const items = [
+        {
+            label: 'Home', command: () => {
+                navigateToPage('/')
+            }
+        },
+        {
+            label: 'Posts', command: () => {
+                navigateToPage('/posts')
+            }
+        },
+        {
+            label: 'About', command: () => {
+                navigateToPage('/about')
+            }
+        }
+    ];
     return (
-      <div>
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">Demo</NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink className={"nav-link"} exact to="/">
-                  Home
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink className={"nav-link"} to="/posts">
-                  Posts
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink className={"nav-link"} to="/about">
-                  About
-                </NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
-      </div>
+        <Menubar model={items}/>
     );
-  }
-}
+};
+
+export default withRouter(Header)

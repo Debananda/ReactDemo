@@ -1,15 +1,9 @@
 import React, {Component} from "react";
 import {
-    Card,
-    CardHeader,
-    CardBody,
-    Form,
-    FormGroup,
-    Input,
-    Label,
-    Button,
-    Col
-} from "reactstrap";
+    Card
+} from "primereact/card";
+import {InputText} from "primereact/inputtext";
+import {Button} from 'primereact/button';
 import {Redirect} from 'react-router-dom';
 import withLoader from "../Common/withLoader";
 
@@ -37,49 +31,47 @@ class SignIn extends Component {
             return <Redirect to={from}/>
         }
         return (
-            <div className="container-fluid">
-                <div className="row justify-content-center">
-                    <div className="col-xs-12 col-sm-6 col-md-4">
-                        <Card>
-                            <CardHeader>Sign In</CardHeader>
-                            <CardBody>
-                                <Form onSubmit={this.handleLogin}>
-                                    <FormGroup row>
-                                        <Label sm={4}>User Name</Label>
-                                        <Col sm={8}>
-                                            <Input
-                                                type="email"
-                                                name="userName"
-                                                value={this.state.userName}
-                                                onChange={this.handleInputChange}
-                                                placeholder="User Name"
-                                            />
-                                        </Col>
-                                    </FormGroup>
-                                    <FormGroup row>
-                                        <Label sm={4}>Password</Label>
-                                        <Col sm={8}>
-                                            <Input
-                                                type="password"
-                                                name="password"
-                                                value={this.state.password}
-                                                onChange={this.handleInputChange}
-                                                placeholder="Password"
-                                            />
-                                        </Col>
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Button type="submit" color="primary">
-                                            Sign In
-                                        </Button>
-                                        <Button color="link" onClick={this.redirectSignUP}>
-                                            Sign Up
-                                        </Button>
-                                    </FormGroup>
-                                </Form>
-                            </CardBody>
-                        </Card>
-                    </div>
+            <div className="p-grid p-justify-between">
+                <div className={"p-col-4 p-col-align-center p-offset-4"}>
+                    <Card title={"Sign In"}>
+                        <form onSubmit={this.handleLogin} className={"p-grid p-fluid"}>
+                            <div className={"p-col-12"}>
+                                <span className="p-float-label">
+                                    <InputText type="email"
+                                               name="userName"
+                                               id="txtUserName"
+                                               value={this.state.userName}
+                                               onChange={this.handleInputChange}/>
+                                               <label htmlFor="txtUserName">Username</label>
+                                </span>
+                            </div>
+                            <div className={"p-col-12"}>
+                                <span className="p-float-label">
+                                    <InputText
+                                        type="password"
+                                        name="password"
+                                        value={this.state.password}
+                                        onChange={this.handleInputChange}
+                                        id={"txtPassword"}
+                                    />
+                                    <label htmlFor="txtPassword">Password</label>
+                                </span>
+                            </div>
+                            <div className={"p-col-12"}>
+                                <div className="p-grid">
+                                    <div className="p-col-6">
+                                        <Button type="submit" label={"Sign In"}/>
+                                    </div>
+                                    <div className="p-col-6">
+                                        <Button color="link" onClick={this.redirectSignUP} label={"Sign Up"}
+                                                className={"p-button-secondary"}/>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </form>
+                    </Card>
                 </div>
             </div>
         );
