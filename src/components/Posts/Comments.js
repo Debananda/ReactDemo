@@ -36,7 +36,9 @@ class Comments extends Component {
     }
 }
 
-export default withLoader(connect(state => ({
-    comments: state.comment.comments,
-    loading: state.comment.loading
-}), {loadPostComments})(Comments));
+export default withLoader(
+    connect(state => ({
+        comments: state.comment.comments,
+        loading: state.comment.loading
+    }), {loadPostComments})(Comments)
+);

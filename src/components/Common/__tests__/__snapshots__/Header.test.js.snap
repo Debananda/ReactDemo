@@ -1,71 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`header component testing shall have correct snapShot 1`] = `
-<div>
-  <nav
-    className="navbar navbar-expand-md navbar-light bg-light"
+<div
+  className="p-menubar p-component"
+  id={null}
+  style={null}
+>
+  <ul
+    className="p-menubar-root-list"
   >
-    <a
-      className="navbar-brand"
-      href="/"
+    <li
+      className="p-menuitem"
+      onMouseEnter={[Function]}
     >
-      Demo
-    </a>
-    <button
-      className="navbar-toggler"
-      onClick={[Function]}
-      type="button"
-    >
-      <span
-        className="navbar-toggler-icon"
-      />
-    </button>
-    <div
-      className="collapse navbar-collapse"
-      style={Object {}}
-    >
-      <ul
-        className="ml-auto navbar-nav"
+      <a
+        className="p-menuitem-link"
+        href="#"
+        onClick={[Function]}
+        onKeyDown={[Function]}
       >
-        <li
-          className="nav-item"
+        <span
+          className="p-menuitem-text"
         >
-          <a
-            aria-current="page"
-            className="nav-link active"
-            href="/"
-            onClick={[Function]}
-            style={Object {}}
-          >
-            Home
-          </a>
-        </li>
-        <li
-          className="nav-item"
+          Home
+        </span>
+      </a>
+    </li>
+    <li
+      className="p-menuitem"
+      onMouseEnter={[Function]}
+    >
+      <a
+        className="p-menuitem-link"
+        href="#"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+      >
+        <span
+          className="p-menuitem-text"
         >
-          <a
-            aria-current={null}
-            className="nav-link"
-            href="/posts"
-            onClick={[Function]}
-          >
-            Posts
-          </a>
-        </li>
-        <li
-          className="nav-item"
+          Posts
+        </span>
+      </a>
+    </li>
+    <li
+      className="p-menuitem"
+      onMouseEnter={[Function]}
+    >
+      <a
+        className="p-menuitem-link"
+        href="#"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+      >
+        <span
+          className="p-menuitem-text"
         >
-          <a
-            aria-current={null}
-            className="nav-link"
-            href="/about"
-            onClick={[Function]}
-          >
-            About
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+          About
+        </span>
+      </a>
+    </li>
+  </ul>
 </div>
 `;
