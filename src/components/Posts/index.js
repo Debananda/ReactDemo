@@ -8,10 +8,7 @@ export default class Posts extends Component {
     return (
       <Switch>
         <Route path={this.props.match.url} component={PostList} exact />
-        <Route
-          path={`${this.props.match.url}/:id/comments`}
-          component={Comments}
-        />
+        <Route path={`${this.props.match.url}/:id/comments`} component={Comments} />
       </Switch>
     );
   }

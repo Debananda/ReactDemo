@@ -1,24 +1,28 @@
-import React, { Component, Fragment } from "react";
-import { Row, Col, Modal, ModalHeader, ModalBody } from "reactstrap";
+import React, { Component } from "react";
+import { Container, Row, Col, Modal, ModalHeader, ModalBody } from "reactstrap";
 import Post from "./Post";
 import UserDetails from "./UserDetails";
-import Loader from "../Common/Loader";
+import withLoader from "../Common/withLoader";
+import { connect } from "react-redux";
+import { loadAllPosts, selectUser } from "../../store/actions/PostActions";
 
-export default class PostList extends Component {
+class PostList extends Component {
   state = {
-    posts: [],
     userDetails: {},
     modal: false
   };
   componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then(response => response.json())
-      .then(json => this.setState({ posts: json }));
+    this.props.loadAllPosts();
   }
+  componentDidUpdate = prevProps => {
+    if (this.props.userDetails !== prevProps.userDetails) {
+      this.setState({
+        modal: Object.keys(this.props.userDetails || {}).length > 0
+      });
+    }
+  };
   getUserDetails = userId => {
-    fetch("https://jsonplaceholder.typicode.com/users/" + userId)
-      .then(response => response.json())
-      .then(json => this.setState({ userDetails: json, modal: true }));
+    this.props.selectUser(userId);
   };
   toggle = () => {
     this.setState(prevState => ({
@@ -26,24 +30,33 @@ export default class PostList extends Component {
     }));
   };
   render() {
-    return this.state.posts.length > 0 ? (
-      <Fragment>
+    return (
+      <Container fluid>
         <Row>
-          {this.state.posts.map(post => (
-            <Col key={post.id} md="3" sm="6" xs="12">
-              <Post post={post} getUserDetails={this.getUserDetails} />
-            </Col>
-          ))}
+          {this.props.posts &&
+            this.props.posts.map(post => (
+              <Col key={post.id} md="3" sm="6" xs="12">
+                <Post post={post} getUserDetails={this.getUserDetails} />
+              </Col>
+            ))}
         </Row>
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>User Details</ModalHeader>
           <ModalBody>
-            <UserDetails user={this.state.userDetails} />
+            <UserDetails user={this.props.userDetails} />
           </ModalBody>
         </Modal>
-      </Fragment>
-    ) : (
-      <Loader show={true} />
+      </Container>
     );
   }
 }
+
+export default withLoader(
+  connect(
+    state => ({ posts: state.post.posts, loading: state.post.loading, userDetails: state.post.userDetails }),
+    {
+      loadAllPosts,
+      selectUser
+    }
+  )(PostList)
+);

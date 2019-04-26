@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User Details Component Testing snapshot testing 1`] = `
+<div
+  className="card"
+>
+  <div
+    className="card-header"
+  >
+    Leanne Graham
+  </div>
+  <div
+    className="card-body"
+  >
+    <p
+      id="email"
+    >
+      Email : 
+      Sincere@april.biz
+    </p>
+    <p
+      id="phone"
+    >
+      Phone : 
+      1-770-736-8031 x56442
+    </p>
+    <address>
+      Address : Kulas Light, Apt. 556, Gwenborough - 92998-3874
+    </address>
+  </div>
+</div>
+`;
