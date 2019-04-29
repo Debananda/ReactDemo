@@ -9,6 +9,19 @@ export class AuthProvider extends Component {
     isUserAuthenticated: false,
     error: null
   };
+  componentDidMount() {
+    const loginDetails = JSON.parse(
+      window.localStorage.getItem("loginDetails")
+    );
+    if (loginDetails) {
+      if (new Date(loginDetails.expiry) > new Date()) {
+        this.setState({
+          user: loginDetails.user,
+          isUserAuthenticated: loginDetails.isUserAuthenticated
+        });
+      }
+    }
+  }
   userSignIn = (userName, password) => {
     this.setState({
       loading: true,
@@ -16,7 +29,6 @@ export class AuthProvider extends Component {
       isUserAuthenticated: false,
       user: {}
     });
-    console.log("here");
     const signInPromise = new Promise((resolve, reject) => {
       if (userName === "deba1988@gmail.com" && password === "password") {
         setTimeout(
@@ -46,6 +58,16 @@ export class AuthProvider extends Component {
     });
     signInPromise.then(
       user => {
+        const currDate = new Date();
+        const expiry = currDate.setHours(currDate.getHours() + 2);
+        window.localStorage.setItem(
+          "loginDetails",
+          JSON.stringify({
+            isUserAuthenticated: true,
+            user,
+            expiry: new Date(expiry)
+          })
+        );
         this.setState({
           user,
           loading: false,
@@ -54,6 +76,14 @@ export class AuthProvider extends Component {
         });
       },
       error => {
+        window.localStorage.setItem(
+          "loginDetails",
+          JSON.stringify({
+            isUserAuthenticated: true,
+            user: null,
+            expiry: new Date(0)
+          })
+        );
         this.setState({
           user: {},
           loading: false,
