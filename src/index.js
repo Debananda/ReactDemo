@@ -7,13 +7,16 @@ import * as serviceWorker from "./serviceWorker";
 import { AuthProvider } from "./context/AuthContext";
 import { PostProvider } from "./context/PostContext";
 import { UserProvider } from "./context/UserContext";
+import { CommentProvider } from "./context/CommentContext";
 
 ReactDOM.render(
   <AuthProvider>
     <PostProvider>
-      <UserProvider>
-        <App />
-      </UserProvider>
+      <CommentProvider>
+        <UserProvider>
+          <App />
+        </UserProvider>
+      </CommentProvider>
     </PostProvider>
   </AuthProvider>,
   document.getElementById("root")

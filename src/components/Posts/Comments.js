@@ -1,20 +1,14 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
-import Comment from "./Comment";
+import { CommentContext } from "../../context/CommentContext";
+import CommentsList from "./CommentsList";
 
 export default class Comments extends Component {
-  state = { comments: [] };
+  static contextType = CommentContext;
 
   componentDidMount() {
     const postId = Number.parseInt(this.props.match.params["id"]);
-    if (postId) {
-      fetch("https://jsonplaceholder.typicode.com/comments")
-        .then(response => response.json())
-        .then(json => {
-          const comments = json.filter(c => c.postId === postId);
-          this.setState({ comments });
-        });
-    }
+    this.context.loadComments(postId);
   }
 
   goBack = () => {
@@ -22,6 +16,7 @@ export default class Comments extends Component {
   };
 
   render() {
+    console.log(this.context);
     return (
       <Container fluid>
         <Row>
@@ -33,11 +28,10 @@ export default class Comments extends Component {
               </Button>
             </div>
           </Col>
-          {this.state.comments.map(comment => (
-            <Col xs="12" sm="6" md="3" key={comment.id}>
-              <Comment comment={comment} />
-            </Col>
-          ))}
+          <CommentsList
+            comments={this.context.comments}
+            loading={this.context.loading}
+          />
         </Row>
       </Container>
     );
